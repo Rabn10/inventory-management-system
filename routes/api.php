@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,9 @@ Route::group(['prefix' => 'prod'], function(){
 Route::group(['prefix' => 'cust'], function(){
     Route::post('/store', [CustomerController::class , 'store'] );
     Route::get('/index', [CustomerController::class , 'index'] );
+});
+
+Route::group(['prefix' => 'order'], function(){
+    Route::post('/store', [OrderController::class , 'store'] );
+    Route::get('/index', [OrderController::class , 'index'] );
 });
