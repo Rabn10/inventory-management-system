@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,9 @@ Route::group(['prefix' => 'cust'], function(){
 Route::group(['prefix' => 'order'], function(){
     Route::post('/store', [OrderController::class , 'store'] );
     Route::get('/index', [OrderController::class , 'index'] );
+});
+
+Route::group(['prefix' => 'odD'], function(){
+    Route::post('/store', [OrderDetailController::class , 'store'] );
+    Route::get('/index', [OrderDetailController::class , 'index'] );
 });
