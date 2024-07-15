@@ -42,4 +42,57 @@ class SupplierController extends Controller
             throw $th;
         }
     }
+
+    public function show($id){
+        // dd($id);
+        try {
+            $showSuppliers = Supplier::where('id', $id)->where('status', true)->first();
+            return response ()-> json([
+                'status' => 1,
+                'data' => $showSuppliers
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, $id){
+        try {
+            $UpdateSup = Supplier::where('id', $id)->where('status', true)->first();
+            $UpdateSup->supplierID = $request->supplierID;
+            $UpdateSup->suppliersName = $request->suppliersName;
+            $UpdateSup->contactName = $request->contactName;
+            $UpdateSup->address = $request->address;
+            $UpdateSup->city = $request->city;
+            $UpdateSup->phone = $request->phone;
+            $UpdateSup->email = $request->email;
+            $UpdateSup->save();
+
+            return response ()-> json ([
+                'status' => 1,
+                'message' => 'Suppliers  Are Updated Successfully',
+                'data' => $UpdateSup
+
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    } 
+
+    public function destory($id){
+        try {
+            $destorySup = Supplier::where('id', $id)->where('status', 1)->first();
+            $destorySup->status = false;
+            $destorySup->save();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Delete A Suppliers',
+                'data' => $destorySup
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }  
+    }
 }
