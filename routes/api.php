@@ -9,7 +9,6 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\InventoryController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
