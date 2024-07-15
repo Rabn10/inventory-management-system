@@ -29,13 +29,16 @@ Route::group(['prefix' => 'cat'], function(){
     Route::get('/index', [CategoryController::class , 'index'] );
     Route::get('/show/{id}', [CategoryController::class , 'show'] );
     Route::put('/update/{id}', [CategoryController::class , 'update'] );
-    Route::delete('/destory/{id}', [CategoryController::class , 'destroy'] );
+    Route::delete('/destory/{id}', [CategoryController::class , 'destory'] );
     
 });
 
 Route::group(['prefix' => 'supp'], function(){
     Route::post('/store', [SupplierController::class , 'store'] );
     Route::get('/index', [SupplierController::class , 'index'] );
+    Route::get('/show/{id}', [SupplierController::class , 'show'] );
+    Route::put('/update/{id}', [SupplierController::class , 'update'] );
+    Route::delete('/destory/{id}', [SupplierController::class , 'destory'] );
 });
 
 Route::group(['prefix' => 'prod'], function(){
