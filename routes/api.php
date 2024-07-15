@@ -8,7 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
-
+use App\Http\Controllers\InventoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,6 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'cat'], function(){
     Route::post('/store', [CategoryController::class , 'store'] );
     Route::get('/index', [CategoryController::class , 'index'] );
+    Route::get('/show/{id}', [CategoryController::class , 'show'] );
+    Route::put('/update/{id}', [CategoryController::class , 'update'] );
+    Route::delete('/destory/{id}', [CategoryController::class , 'destroy'] );
     
 });
 
@@ -53,4 +56,9 @@ Route::group(['prefix' => 'order'], function(){
 Route::group(['prefix' => 'odD'], function(){
     Route::post('/store', [OrderDetailController::class , 'store'] );
     Route::get('/index', [OrderDetailController::class , 'index'] );
+});
+
+Route::group(['prefix' => 'inv'], function(){
+    Route::post('/store', [InventoryController::class , 'store'] );
+    Route::get('/index', [InventoryController::class , 'index'] );
 });
