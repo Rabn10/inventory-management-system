@@ -41,4 +41,55 @@ class OrderController extends Controller
         }
     }
 
+    public function show($id){
+
+        try {
+            $showOrders = Order::where('id', $id)->where('status', true)->first();
+            return response ()-> json([
+                'status' => 1,
+                'data' => $showOrders
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, $id){
+        try {
+            $updateOrders = Order::where('id', $id)->where('status', true)->first();
+            $updateOrders->customer_id = $request->customer_id;
+            $updateOrders->order_date = $request->order_date;
+            $updateOrders->ship_time = $request->ship_time;
+            $updateOrders->ship_address = $request->ship_address;
+            $updateOrders->ship_city = $request->ship_city;
+            $updateOrders->save();
+
+            return response ()-> json ([
+                'status' => 1,
+                'message' => 'Orders  Are Updated Successfully',
+                'data' => $updateOrders
+
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    
+    public function destory($id){
+        try {
+            $destoryOrder = Order::where('id', $id)->where('status', 1)->first();
+            $destoryOrder->status = false;
+            $destoryOrder->save();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Delete A Orders',
+                'data' => $destoryOrder
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }  
+    }
+
 }
