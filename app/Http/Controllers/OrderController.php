@@ -33,7 +33,7 @@ class OrderController extends Controller
         
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => '0',
+                    'status' => '1',
                     'message' => 'Validation Error.',
                     'errors' => $validator->errors()
                 ]);
@@ -85,7 +85,7 @@ class OrderController extends Controller
         
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => '0',
+                    'status' => '1',
                     'message' => 'Validation Error.',
                     'errors' => $validator->errors()
                 ]);
