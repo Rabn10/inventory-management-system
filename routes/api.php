@@ -44,6 +44,10 @@ Route::group(['prefix' => 'supp'], function(){
 Route::group(['prefix' => 'prod'], function(){
     Route::post('/store', [ProductController::class , 'store'] );
     Route::get('/index', [ProductController::class , 'index'] );
+    Route::get('/show/{id}', [ProductController::class , 'show'] );
+    Route::put('/update/{id}', [ProductController::class , 'update'] );
+    Route::delete('/destory/{id}', [ProductController::class , 'destory'] );
+
 });
 
 Route::group(['prefix' => 'cust'], function(){
