@@ -41,4 +41,56 @@ class ProductController extends Controller
             throw $th;
         }
     }
+
+    public function show ($id){
+        try {
+            $showProducts = Product::where('id',$id)->where('status', true)->first();
+            return response()->json([
+                'status' => 1,
+                'data' => $showProducts
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function update(Request $request, $id){
+       dd($id);
+        try {
+            $UpdateSup = Product::where('id', $id)->where('status', true)->first();
+            $updateSup->product_name = $request->product_name;
+            $updateSup->suppliersID = $request->suppliersID;
+            $updateSup->categories = $request->categories;
+            $updateSup->quantity = $request->quantity;
+            $updateSup->unitsInStock = $request->unitsInStock;
+            $updateSup->UnitOnOrders = $request->UnitOnOrders;
+            $updateSup->save();
+
+            return response ()-> json ([
+                'status' => 1,
+                'message' => 'Suppliers  Are Updated Successfully',
+                'data' => $updateSup
+
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    } 
+
+    public function destory($id){
+        try {
+            $destoryProd = Product::where('id', $id)->where('status', 1)->first();
+            $destoryProd->status = false;
+            $destoryProd->save();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Deleted A products.',
+                'data' => $destoryProd
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
 }
