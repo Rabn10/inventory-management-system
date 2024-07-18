@@ -53,6 +53,10 @@ Route::group(['prefix' => 'prod'], function(){
 Route::group(['prefix' => 'cust'], function(){
     Route::post('/store', [CustomerController::class , 'store'] );
     Route::get('/index', [CustomerController::class , 'index'] );
+    Route::get('/show/{id}', [CustomerController::class , 'show'] );
+    Route::put('/update/{id}', [CustomerController::class , 'update'] );
+    Route::delete('/destory/{id}', [CustomerController::class , 'destory'] );
+
 });
 
 Route::group(['prefix' => 'order'], function(){
