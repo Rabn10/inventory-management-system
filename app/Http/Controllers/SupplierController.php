@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Validator;
+
 
 class SupplierController extends Controller
 {
@@ -23,6 +25,23 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         try {
+           $supplierVal = Validator::make($request->all(),[
+            "supplierID" => 'required',
+            "suppliersName" => 'required',
+            "contactName" => 'required',
+            "address" => 'required',
+            "city" => 'required',
+            "phone" => 'required',
+            "email" => 'required'
+           ]);
+
+           if($supplierVal->fails()){
+            return response()->json([
+                'status' => '1',
+                'message' => 'Validation Error.',
+                'errors' => $supplierVal->errors()
+            ]);
+           }
             $store = new Supplier();
             $store->supplierID = $request->supplierID;
             $store->suppliersName = $request->suppliersName;
@@ -59,6 +78,23 @@ class SupplierController extends Controller
 
     public function update(Request $request, $id){
         try {
+            $supplierVal = Validator::make($request->all(),[
+                "supplierID" => 'required',
+                "suppliersName" => 'required',
+                "contactName" => 'required',
+                "address" => 'required',
+                "city" => 'required',
+                "phone" => 'required',
+                "email" => 'required'
+               ]);
+    
+               if($supplierVal->fails()){
+                return response()->json([
+                    'status' => '1',
+                    'message' => 'Validation Error.',
+                    'errors' => $supplierVal->errors()
+                ]);
+               }
             $UpdateSup = Supplier::where('id', $id)->where('status', true)->first();
             $UpdateSup->supplierID = $request->supplierID;
             $UpdateSup->suppliersName = $request->suppliersName;
