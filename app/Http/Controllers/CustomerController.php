@@ -40,4 +40,53 @@ class CustomerController extends Controller
             throw $th;
         }
     }
+
+    public function show($id){
+        // dd($id);
+        try {
+            $showCustomer = Customer::where('id', $id)->where('status', true)->first();
+            return response ()-> json([
+                'status' => 1,
+                'data' => $showCustomer
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    public function update(Request $request, $id){
+        try {
+            $updateCustomer = Customer::where('id', $id)->where('status', true)->first();
+            $updateCustomer->customer_name = $request->customer_name;
+            $updateCustomer->contact_number = $request->contact_number;
+            $updateCustomer->address = $request->address;
+            $updateCustomer->city = $request->city;
+            $updateCustomer->email = $request->email;
+            $updateCustomer->save();
+            return response ()-> json ([
+                'status' => 1,
+                'message' => 'Customers  Are Updated Successfully',
+                'data' => $updateCustomer
+
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function destory($id){
+        try {
+            $destoryCust = Customer::where('id', $id)->where('status', 1)->first();
+            $destoryCust->status = false;
+            $destoryCust->save();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Delete A Customers',
+                'data' => $destoryCust
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }  
+    }
 }
