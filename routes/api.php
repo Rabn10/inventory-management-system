@@ -62,6 +62,9 @@ Route::group(['prefix' => 'cust'], function(){
 Route::group(['prefix' => 'order'], function(){
     Route::post('/store', [OrderController::class , 'store'] );
     Route::get('/index', [OrderController::class , 'index'] );
+    Route::get('/show/{id}', [OrderController::class , 'show'] );
+    Route::put('/update/{id}', [OrderController::class , 'update'] );
+    Route::delete('/destory/{id}', [OrderController::class , 'destory'] );
 });
 
 Route::group(['prefix' => 'odD'], function(){
