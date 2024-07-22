@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
+
 
 class CategoryController extends Controller
 {
@@ -23,6 +25,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            $categoryVal = Validator::make($request->all(),[
+            'categoriesID' => 'required',
+            'categoriesName' => 'required'
+            ]);
+            if ($categoryVal->fails()){
+                return response()->json([
+                    'status' => '1',
+                    'message' => 'Validation Error.',
+                    'errors' => $categoryVal->errors()
+                ]);
+            }
             $store = new Category();
             $store->categoriesID = $request->categoriesID;
             $store->categoriesName = $request->categoriesName;
@@ -51,6 +64,17 @@ class CategoryController extends Controller
     }
     public function update(Request $request, $id){
         try {
+            $updateVal = Validator::make($request->all(),[
+                'categoriesID' => 'required',
+                'categoriesName' => 'required'
+                ]);
+                if ($updateVal->fails()){
+                    return response()->json([
+                        'status' => '1',
+                        'message' => 'Validation Error.',
+                        'errors' => $updateVal->errors()
+                    ]);
+                }
             $UpdateCat = Category::where('id', $id)->where('status', true)->first();
             $UpdateCat->categoriesID = $request->categoriesID;
             $UpdateCat->categoriesName = $request->categoriesName;
