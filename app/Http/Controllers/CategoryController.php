@@ -25,6 +25,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            //to store category
             $categoryVal = Validator::make($request->all(),[
             'categoriesID' => 'required',
             'categoriesName' => 'required'
